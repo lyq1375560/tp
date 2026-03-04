@@ -17,3 +17,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Implementation, testing
 
 [[github](https://github.com/yongqinglim)]
+### Jean Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
+### Hazel Nur Hidayah
+
+<img src="images/hazelhidayah.png" width="200px">
+
+[[github](http://github.com/hazelhidayah)]
+
+* Role: Developer
+* Responsibilities: UI
