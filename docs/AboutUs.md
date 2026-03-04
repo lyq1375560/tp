@@ -45,3 +45,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: ?
+
+### Sureshkumar Sheasu
+
+<img src="images/sheasu.png" width="200px">
+
+[[github](https://github.com/Sheasu)]
+
+* Role: Developer
+* Responsibilities: Data
+
