@@ -14,7 +14,7 @@ public class Name {
     public static final String MESSAGE_CONSTRAINTS = "Error: Invalid name format.";
     public static final String MESSAGE_NAME_REQUIRED = "Error: Name is required.";
 
-    private static final int MAX_LENGTH = 100;
+    public static final int MAX_LENGTH = 100;
     private static final String VALIDATION_REGEX = "[A-Za-z .'-]+";
 
     private final String fullName;
