@@ -27,6 +27,12 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
+        if (Arrays.stream(nameKeywords).anyMatch(keyword -> keyword.length() > 50)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, "Keyword length must not exceed 50 characters.")
+            );
+        }
+
         return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
