@@ -16,6 +16,7 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
+    // Commented out due to how we now have a complicated Predicate.
     /*
     @Test
     public void parse_validArgs_returnsFindCommand() {

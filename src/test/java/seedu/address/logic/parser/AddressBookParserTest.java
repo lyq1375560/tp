@@ -62,6 +62,7 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
+    // Commented out due to how we now have a complicated Predicate.
     /*
     @Test
     public void parseCommand_find() throws Exception {
