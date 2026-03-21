@@ -5,7 +5,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -14,11 +17,19 @@ import java.util.Objects;
  */
 public class Products {
 
-    public static final String MESSAGE_CONSTRAINTS = "Error: Invalid products format.";
+    public static final List<String> ALLOWED_PRODUCTS = List.of(
+            "Muffin",
+            "Chocolate Cake",
+            "Vanilla Cake",
+            "Brownie",
+            "Cookie"
+    );
+    public static final int MAX_ITEM_COUNT = 5;
+    public static final String MESSAGE_CONSTRAINTS = "Products must be a comma-separated list with up to "
+            + MAX_ITEM_COUNT + " items, chosen from: " + String.join(", ", ALLOWED_PRODUCTS) + ".";
     public static final String MESSAGE_PRODUCTS_REQUIRED = "Error: Products are required.";
 
-    private static final int MAX_ITEM_LENGTH = 80;
-    private static final String ITEM_VALIDATION_REGEX = "[\\p{Alnum} _\\-:;\\.]+";
+    private static final Map<String, String> CANONICAL_BY_LOWERCASE = buildCanonicalLookup();
 
     private static final Products EMPTY = new Products(Collections.emptyList());
 
@@ -32,7 +43,7 @@ public class Products {
     public Products(String products) {
         requireNonNull(products);
         checkArgument(isValidProducts(products), MESSAGE_CONSTRAINTS);
-        this.items = splitAndTrim(products);
+        this.items = normalizeItems(products);
     }
 
     private Products(List<String> items) {
@@ -55,8 +66,11 @@ public class Products {
         if (parsedItems.isEmpty()) {
             return false;
         }
+        if (parsedItems.size() > MAX_ITEM_COUNT) {
+            return false;
+        }
         for (String item : parsedItems) {
-            if (item.isEmpty() || item.length() > MAX_ITEM_LENGTH || !item.matches(ITEM_VALIDATION_REGEX)) {
+            if (item.isEmpty() || toCanonical(item) == null) {
                 return false;
             }
         }
@@ -101,5 +115,28 @@ public class Products {
             trimmedItems.add(item.trim());
         }
         return Collections.unmodifiableList(trimmedItems);
+    }
+
+    private static List<String> normalizeItems(String products) {
+        List<String> rawItems = splitAndTrim(products);
+        List<String> normalizedItems = new ArrayList<>(rawItems.size());
+        for (String item : rawItems) {
+            String canonical = toCanonical(item);
+            normalizedItems.add(canonical == null ? item : canonical);
+        }
+        return Collections.unmodifiableList(normalizedItems);
+    }
+
+    private static String toCanonical(String item) {
+        String trimmed = item.trim();
+        return CANONICAL_BY_LOWERCASE.get(trimmed.toLowerCase(Locale.ROOT));
+    }
+
+    private static Map<String, String> buildCanonicalLookup() {
+        Map<String, String> lookup = new HashMap<>();
+        for (String product : ALLOWED_PRODUCTS) {
+            lookup.put(product.toLowerCase(Locale.ROOT), product);
+        }
+        return Collections.unmodifiableMap(lookup);
     }
 }
