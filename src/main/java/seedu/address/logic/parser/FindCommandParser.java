@@ -11,6 +11,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Contact;
 import seedu.address.model.person.ContactContainsKeywordsPredicate;
+import seedu.address.model.person.LocationContainsKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -46,6 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<Predicate<Person>> predicates = new ArrayList<Predicate<Person>>();
         predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         predicates.add(new ContactContainsKeywordsPredicate(Arrays.asList(keywords)));
+        predicates.add(new LocationContainsKeywordsPredicate(Arrays.asList(keywords)));
 
         Predicate<Person> anyPredicate = predicates.stream().reduce(Predicate::or).orElse(person -> false);
 
