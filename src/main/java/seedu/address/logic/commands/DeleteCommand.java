@@ -3,12 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,14 +30,20 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "SUCCESS: Deleted Person: %1$s";
 
     private final Index targetIndex;
-    private final String targetName;
+    private final Name targetName;
 
+    /**
+     * Creates a DeleteCommand to delete a person using index.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.targetName = null;
     }
 
-    public DeleteCommand(String targetName) {
+    /**
+     * Creates a DeleteCommand to delete a person using name.
+     */
+    public DeleteCommand(Name targetName) {
         this.targetIndex = null;
         this.targetName = targetName;
     }
@@ -61,7 +69,7 @@ public class DeleteCommand extends Command {
         }
 
         List<Person> matches = lastShownList.stream()
-                .filter(p -> p.getName().getFullName().equalsIgnoreCase(targetName))
+                .filter(p -> p.getName().equals(targetName))
                 .toList();
 
         if (matches.isEmpty()) {
@@ -91,14 +99,15 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex)
-                && targetName.equals(otherDeleteCommand.targetName);
+        return Objects.equals(targetIndex, otherDeleteCommand.targetIndex)
+                && Objects.equals(targetName, otherDeleteCommand.targetName);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
+                .add("targetName", targetName)
                 .toString();
     }
 }
