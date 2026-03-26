@@ -14,6 +14,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Contact;
 import seedu.address.model.person.ContactContainsKeywordsPredicate;
+import seedu.address.model.person.LocationContainsKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;

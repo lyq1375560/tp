@@ -7,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCTS;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -28,13 +31,15 @@ public class AddCommand extends Command {
             + "[" + PREFIX_CONTACT + "CONTACT]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Samuel "
-            + PREFIX_PRODUCTS + "Chocolate cake "
+            + PREFIX_PRODUCTS + "Chocolate Cake "
             + PREFIX_LOCATION + "Boon lay "
             + PREFIX_DEADLINE + "2026-03-10 "
             + PREFIX_CONTACT + "91234567";
 
     public static final String MESSAGE_SUCCESS = "Added Customer: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This customer already exists in ClientEase";
+
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
 
     private final Person toAdd;
 
@@ -51,9 +56,11 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
+            logger.warning("Duplicate customer rejected: " + toAdd.getName());
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        logger.info("Adding customer: " + toAdd.getName());
         model.addPerson(toAdd); // saves new customer in model
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getName())); // shows success message
     }
