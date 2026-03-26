@@ -25,6 +25,7 @@ public class FindCommand extends Command {
     private final Predicate<Person> predicate;
 
     public FindCommand(Predicate<Person> predicate) {
+        assert predicate != null : "The predicate should not be null";
         this.predicate = predicate;
     }
 
