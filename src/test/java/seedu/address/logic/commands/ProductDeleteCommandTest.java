@@ -37,9 +37,8 @@ public class ProductDeleteCommandTest {
     @Test
     public void execute_productNotInCatalog_throwsCommandException() {
         ModelManager model = new ModelManager();
-        assertThrows(CommandException.class,
-                ProductDeleteCommand.MESSAGE_PRODUCT_NOT_FOUND,
-                () -> new ProductDeleteCommand(new Product("Muffin")).execute(model));
+        assertThrows(CommandException.class, ProductDeleteCommand.MESSAGE_PRODUCT_NOT_FOUND, () ->
+                        new ProductDeleteCommand(new Product("Muffin")).execute(model));
     }
 
     @Test
@@ -50,8 +49,8 @@ public class ProductDeleteCommandTest {
         Person person = new Person(new Name("Alice"), new Products("Muffin"),
                 Location.empty(), Deadline.empty(), Contact.empty());
         model.addPerson(person);
-        assertThrows(CommandException.class,
-                () -> new ProductDeleteCommand(product).execute(model));
+        assertThrows(CommandException.class, () ->
+                new ProductDeleteCommand(product).execute(model));
     }
 
     @Test
@@ -61,7 +60,7 @@ public class ProductDeleteCommandTest {
         Person person = new Person(new Name("Alice"), new Products("muffin"),
                 Location.empty(), Deadline.empty(), Contact.empty());
         model.addPerson(person);
-        assertThrows(CommandException.class,
-                () -> new ProductDeleteCommand(new Product("Muffin")).execute(model));
+        assertThrows(CommandException.class, () ->
+                new ProductDeleteCommand(new Product("Muffin")).execute(model));
     }
 }

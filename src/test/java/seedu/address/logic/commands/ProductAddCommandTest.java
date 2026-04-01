@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -33,17 +32,15 @@ public class ProductAddCommandTest {
         ModelManager model = new ModelManager();
         Product product = new Product("Muffin");
         model.addProduct(product);
-        assertThrows(CommandException.class,
-                ProductAddCommand.MESSAGE_DUPLICATE_PRODUCT,
-                () -> new ProductAddCommand(product).execute(model));
+        assertThrows(CommandException.class, ProductAddCommand.MESSAGE_DUPLICATE_PRODUCT, () ->
+                new ProductAddCommand(product).execute(model));
     }
 
     @Test
     public void execute_caseInsensitiveDuplicate_throwsCommandException() {
         ModelManager model = new ModelManager();
         model.addProduct(new Product("Muffin"));
-        assertThrows(CommandException.class,
-                ProductAddCommand.MESSAGE_DUPLICATE_PRODUCT,
-                () -> new ProductAddCommand(new Product("muffin")).execute(model));
+        assertThrows(CommandException.class, ProductAddCommand.MESSAGE_DUPLICATE_PRODUCT, () ->
+                new ProductAddCommand(new Product("muffin")).execute(model));
     }
 }
