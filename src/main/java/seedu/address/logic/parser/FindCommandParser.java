@@ -45,10 +45,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         Prefix[] prefixes = {
-                PREFIX_CONTACT, PREFIX_CONTACT_SHORT,
-                PREFIX_NAME, PREFIX_NAME_SHORT,
-                PREFIX_LOCATION, PREFIX_LOCATION_SHORT,
-                PREFIX_PRODUCTS, PREFIX_PRODUCTS_SHORT,
+            PREFIX_CONTACT, PREFIX_CONTACT_SHORT,
+            PREFIX_NAME, PREFIX_NAME_SHORT,
+            PREFIX_LOCATION, PREFIX_LOCATION_SHORT,
+            PREFIX_PRODUCTS, PREFIX_PRODUCTS_SHORT,
         };
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, prefixes);
