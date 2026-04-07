@@ -82,7 +82,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             fullPred = namePred.or(contactPred).or(locationPred);
 
             if (!productsKeywords.isEmpty()) {
-                fullPred = fullPred.or(new ProductsContainKeywordsPredicate(productsKeywords));
+                fullPred = fullPred.and(new ProductsContainKeywordsPredicate(productsKeywords));
             }
         }
 
