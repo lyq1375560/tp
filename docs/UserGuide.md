@@ -13,6 +13,10 @@ Instead of clicking through multiple menus, ClientEase lets you type short comma
 track products and deadlines, and retrieve information instantly, keeping your records organised without the overhead
 of full-scale business management systems.
 
+**Scenario:** You run a home bakery and receive orders through chat and email. Throughout the day you need to update
+phone numbers, delivery locations, and due dates quickly while keeping a clear view of open orders. ClientEase lets you
+do those updates in seconds with short commands, without switching between multiple windows.
+
 - If you are new to ClientEase, start with the [Quick Start](#quick-start) section.
 - If you are looking for a specific command, jump to the [Command Summary](#command-summary).
 - If you are a developer, refer to the [Developer Guide](https://ay2526s2-cs2103t-t12-2.github.io/tp/DeveloperGuide.html).
@@ -63,7 +67,7 @@ This guide assumes you are comfortable with:
 | Basic data awareness | Understanding that your data is stored in a local file, and knowing to back it up |
 
 > **Not sure if ClientEase is right for you?** If you manage more than a few hundred customers with complex team
-> workflows, you may want a full-scale CRM instead.
+> workflows, you may want a full-scale customer relationship management (CRM) system instead.
 
 ---
 
@@ -101,13 +105,15 @@ This guide assumes you are comfortable with:
 
 ![Ui](images/Ui.png)
 
-| Area | Purpose |
-|---|---|
-| **Command Box** (top) | Where you type your commands. |
-| **Result Display** (below command box) | Shows success messages or error feedback after each command. |
-| **Customer List Panel** | Displays all customers. Each card is color-coded by **Priority Level** (Green/Yellow/Red) based on total product quantity. |
-| **Priority Badge** | A small tag (LOW, MEDIUM, HIGH) next to the name for quick status identification. |
-| **Status Bar** (bottom) | Shows the data file save location. |
+The table below follows the **top-to-bottom order** in the screenshot.
+
+| Label | Area | Purpose |
+|---|---|---|
+| **1** | **Menu Bar** | Access `Help` and `Exit`. |
+| **2** | **Command Box** | Where you type your commands. |
+| **3** | **Result Display** | Shows success messages or error feedback after each command. |
+| **4** | **Customer List Panel** | Displays all customers. Each card is colour-coded by **Priority Level** (Green/Yellow/Red) based on total product quantity and shows a priority badge (LOW, MEDIUM, HIGH) when applicable. |
+| **5** | **Status Bar** | Shows the data file save location. |
 
 ---
 
@@ -124,8 +130,10 @@ Expected output: All sample customers are shown in the Customer List Panel.
 
 **Step 2 - Add your first real customer:**
 ```
-add name/Jane Tan contact/91234567;jane@mybusiness.com products/Chocolate Cake:2, Muffin:5 location/Tampines deadline/2025-12-31
+add name/Jane Tan contact/91234567;jane@mybusiness.com \
+products/Chocolate Cake:2, Muffin:5 location/Tampines deadline/2025-12-31
 ```
+Type the command on one line without the `\`.
 Expected output: `Added Customer: Jane Tan`
 
 **Step 3 - Find a customer by name:**
@@ -152,8 +160,7 @@ exit
 ```
 Expected output: `Goodbye! Exiting ClientEase. You have <N> customer(s) saved.`
 
-> [!TIP]
-> All your data is saved automatically after every command. You never need to press a "Save" button.
+> **Tip:** All your data is saved automatically after every command. You never need to press a "Save" button.
 
 ---
 
@@ -170,6 +177,7 @@ Expected output: `Goodbye! Exiting ClientEase. You have <N> customer(s) saved.`
 - Parameters can be entered **in any order**. For example, `add name/John Doe contact/98765432` is the same as
   `add contact/98765432 name/John Doe`.
 - Commands that take no parameters (e.g. `help`, `list`, `exit`) will **ignore any extra text** you type after them.
+- Line breaks and trailing `\` in examples are **for readability only**. Type the full command on a single line without `\`.
 - If you are using a **PDF version** of this guide, be careful when copying multi-line commands — line breaks may cause
   spaces to be omitted.
 
@@ -187,10 +195,9 @@ Opens a help window that provides a quick overview of available commands and a l
 
 - The help window does **not block** the main application — you can continue using ClientEase while it is open.
 - If the help window is already open, running `help` again will focus on the existing window.
-- Command ignore extra space
+- The `help` command ignores any extra text after it.
 
-> [!TIP]
-> Use the help window as a quick reference when you forget command formats, instead of searching through the full guide.
+> **Tip:** Use the help window as a quick reference when you forget command formats, instead of searching through the full guide.
 
 ---
 
@@ -207,18 +214,15 @@ add name/NAME [products/PRODUCTS] [location/LOCATION] [deadline/DEADLINE] [conta
 
 | Parameter | Required? | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |---|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `name/NAME` | Yes | 1-100 characters after trimming and space normalisation. Only ASCII letters (A-Z), spaces, `.`, `'`, and `-`. Must contain at least one letter. Names are unique case-insensitively and with repeated spaces collapsed.                                                                                                                                                                                                                                                          |
-| `products/PRODUCTS` | No | Comma-separated list of 1-5 items chosen from: Muffin, Chocolate Cake, Vanilla Cake, Brownie, Cookie. Items can optionally include a quantity using a colon (e.g., Muffin:3). Matching is case-insensitive. Empty items are invalid.                                                                                                                                                                                                                                             |
-| `location/LOCATION` | No | Non-blank after trimming. Maximum length 200 characters.                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `name/NAME` | Yes | 1–100 characters after trimming. Only letters (A–Z), spaces, `.`, `'`, and `-`. Must contain at least one letter. Names are unique ignoring case and extra spaces (e.g., `John Doe` and `john   doe` are treated as the same name).                                                                                                                                                                                     |
+| `products/PRODUCTS` | No | Comma-separated list of 1-5 items chosen from: Muffin, Chocolate Cake, Vanilla Cake, Brownie, Cookie. Items can optionally include a quantity using a colon (e.g., Muffin:3); if omitted, the quantity defaults to **1**. Matching is case-insensitive. Empty items are invalid.                                                                                                                                                                                           |
+| `location/LOCATION` | No | Must be non-empty after trimming. Maximum length 200 characters.                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `deadline/DEADLINE` | No | Accepted formats: `yyyy-MM-dd HH:mm`, `yyyy-MM-dd`, `dd/MM/yyyy`. Entries without a time default to **23:59**.                                                                                                                                                                                                                                                                                                                                                                   |
-| `contact/CONTACT` | No | Semicolon-separated entries. Each entry must be either an 8-digit local phone number or an international phone in `+<2-3 digit country code><1-12 digit number>` format; spaces in phone numbers are ignored. Emails are up to 100 characters, must start with an alphanumeric character, contain only letters, digits, dots, and hyphens, and contain exactly one `@` with an alphanumeric at the start of the domain. Empty entries (e.g. trailing or double `;`) are invalid. |
+| `contact/CONTACT` | No | One or more phone numbers and/or emails, separated by semicolons. Phone: either an 8-digit local number or `+<country code><number>` (2–3 digit country code + 1–12 digit number). Spaces in phone numbers are ignored. Email: up to 100 characters, letters/digits/dots/hyphens, with exactly one `@` and an alphanumeric at the start of the domain. Empty entries (e.g. trailing or double `;`) are invalid. |
 
-> [!IMPORTANT]
-> **Priority Tagging:**
-> ClientEase automatically tags customers with a priority color based on the **total quantity** of products:
-> * **Green (Low):** 1–5 total items
-> * **Yellow (Medium):** 6–10 total items
-> * **Red (High):** 11 or more total items
+> **Important:** ClientEase automatically tags customers with a priority colour based on the **total quantity** of
+> products. Green (Low) = 1–5 items, Yellow (Medium) = 6–10 items, Red (High) = 11+ items. If you omit a quantity, it
+> counts as 1 toward the total.
 
 **Other constraints:**
 
@@ -228,32 +232,35 @@ add name/NAME [products/PRODUCTS] [location/LOCATION] [deadline/DEADLINE] [conta
 - Optional fields can be omitted.
 - If a prefix is provided with no value (e.g. `products/`), the field is treated as empty.
 - Non-ASCII characters (e.g. Chinese) are rejected in `name/`, `products/`, and `contact/`. `location/` currently accepts
-  any characters as long as it is non-blank and within the length limit.
+  any characters as long as it is non-empty and within the length limit.
 
-> [!WARNING]
-> If you try to add a customer with a name that already exists (case-insensitive, spaces normalised),
+> **Warning:** If you try to add a customer with a name that already exists (case-insensitive, extra spaces ignored),
 > ClientEase will reject the entry and display an error. Check the existing list with `list` before adding.
 
 **Products are listed as a numbered list under each customer card.**
 
 **Examples:**
 
+**Example 1: Add a customer with full details**
 ```
-add name/John Doe contact/98765432;johnd@example.com products/Chocolate Cake:2, Muffin:5 location/Clementi Ave 2 deadline/2025-12-31
+add name/John Doe contact/98765432;johnd@example.com \
+products/Chocolate Cake:2, Muffin:5 location/Clementi Ave 2 deadline/2025-12-31
 ```
-Adds a customer named John Doe, with two unique products with specified quantities, a location, a deadline of 31 Dec 2025 at 23:59, and two contact
-details.
+Type the command on one line without the `\`.
+Effect: Adds a customer named John Doe with products, location, deadline (31 Dec 2025 at 23:59), and contact details.
 
+**Example 2: Add a customer with name only**
 ```
 add name/Sarah Lim
 ```
-Adds a customer named Sarah Lim with no other details. You can `edit` to fill in the rest later.
+Effect: Adds a customer named Sarah Lim with no other details. You can `edit` to fill in the rest later.
+
 
 ---
 
 ### Listing All Customers : `list`
 
-Shows a list of all persons in ClientEase.
+Shows a list of all customers in ClientEase.
 
 **Format:** `list`
 
@@ -261,7 +268,7 @@ Shows a list of all persons in ClientEase.
 
 ### Editing a Customer : `edit`
 
-Edits an existing person in ClientEase.
+Edits an existing customer in ClientEase.
 
 **Format:**
 ```
@@ -270,15 +277,26 @@ edit INDEX [name/NAME] [products/PRODUCTS] [location/LOCATION] [deadline/DATE] [
 
 Short prefixes are supported: `n/` for `name/`, `p/` for `products/`, `l/` for `location/`, `d/` for `deadline/`, and `c/` for `contact/`.
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
+- Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- Products must be chosen from the placeholder list: Muffin, Chocolate Cake, Vanilla Cake, Brownie, Cookie.
+- Products must be chosen from the allowed list: Muffin, Chocolate Cake, Vanilla Cake, Brownie, Cookie.
+- Field constraints are the same as for `add`.
 
 **Examples:**
 
-- `edit 1 contact/91234567` — Edits the contact of the 1st person to be `91234567`.
-- `edit 2 name/Betsy Crower products/Muffin location/Newgate Prison` — Edits the name, products, and location of the 2nd person.
+**Example 1: Edit a contact**
+```
+edit 1 contact/91234567
+```
+Effect: Updates the contact of the 1st customer to `91234567`.
+
+**Example 2: Edit multiple fields**
+```
+edit 2 name/Betsy Crower products/Muffin location/Newgate Prison
+```
+Effect: Updates the name, products, and location of the 2nd customer.
+
 
 ---
 
@@ -293,17 +311,27 @@ find KEYWORD [MORE_KEYWORDS]
 
 - The search is case-insensitive. e.g. `hans` will match `Hans`.
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-- The name, contact and location of each users will be searched.
+- The name, contact and location of each user will be searched.
 - For name and contact, only full words will be matched. e.g. `Han` will not match `Hans`.
 - For location, words containing the keyword will be matched. e.g. `gate` will match `Newgate`.
 - Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 **Examples:**
 
-- `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`
+**Example 1: Find by name**
+```
+find John
+```
+Effect: Returns customers whose name contains `John` as a full word (e.g. `John Doe`).
+
+**Example 2: Find by multiple keywords**
+```
+find alex david
+```
+Effect: Returns customers matching either keyword.
 
 ![result for 'find alex david'](images/findAlexDavidResult.png)
+
 
 ---
 
@@ -316,14 +344,24 @@ Deletes a customer from ClientEase using either their displayed index or exact n
 delete INDEX
 ```
 
-- Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
+- Deletes the customer at the specified `INDEX`.
+- The index refers to the index number shown in the displayed customer list.
 - The index **must be a positive integer** 1, 2, 3, …
 
 **Examples:**
 
-- `list` followed by `delete 2` deletes the 2nd customer in ClientEase.
-- `find Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
+**Example 1: Delete by index**
+```
+delete 2
+```
+Effect: Deletes the 2nd customer in the currently displayed list.
+
+**Example 2: Delete after filtering**
+```
+find Betsy
+delete 1
+```
+Effect: Deletes the 1st customer in the filtered results.
 
 ```
 delete NAME
@@ -334,7 +372,11 @@ delete NAME
 
 **Examples:**
 
-- `delete John Doe` `delete john doe` `delete John Doe [extra space]` All delete the same customer 'John Doe'
+```
+delete John Doe
+```
+Effect: Deletes the customer named `John Doe` (case-insensitive, extra spaces ignored).
+
 
 ---
 
@@ -344,8 +386,8 @@ Clears all entries from ClientEase.
 
 **Format:** `clear`
 
-> [!WARNING]
-> This action is irreversible and will permanently delete all customer records. Consider backing up `data/ClientEase.json` (see [Saving the Data](#saving-the-data)) before running this command.
+> **Warning:** This action is irreversible and will permanently delete all customer records. Consider backing up
+> `data/ClientEase.json` (see [Saving the Data](#saving-the-data)) before running this command.
 
 ---
 
@@ -376,10 +418,11 @@ Your data is stored at:
 
 Advanced users may edit the data file directly using any text editor.
 
-> [!CAUTION]
-> If your changes to the data file makes its format invalid, ClientEase will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+> **Caution:** If your changes to the data file make its format invalid, ClientEase will discard all data and start with
+> an empty data file at the next run. It is recommended to back up the file before editing it.
 >
-> Furthermore, certain edits can cause ClientEase to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+> Certain edits can also cause ClientEase to behave in unexpected ways (e.g., if a value entered is outside the
+> acceptable range). Edit the data file only if you are confident that you can update it correctly.
 
 ---
 
@@ -392,16 +435,16 @@ A: Install the app in the other computer and overwrite the empty data file it cr
 ---
 **Q: Can I have two customers with the same name?**
 
-A: No. ClientEase treats names as unique identifiers (case-insensitive, spaces normalised). If two customers share a
+A: No. ClientEase treats names as unique identifiers (case-insensitive, extra spaces ignored). If two customers share a
 name, consider differentiating them, e.g. `John Doe (Clementi)` and `John Doe (Tampines)`.
 
 ---
 
 ## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. Workaround: delete the `preferences.json` file created by the application before running the application again.
 
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. Workaround: manually restore the minimized Help Window.
 
 ---
 
@@ -410,7 +453,7 @@ name, consider differentiating them, e.g. `John Doe (Clementi)` and `John Doe (T
 | Action | Format | Example                                                                                              |
 |---|---|------------------------------------------------------------------------------------------------------|
 | **Help** | `help` | `help`                                                                                               |
-| **Add** | `add name/NAME [products/PRODUCTS] [location/LOCATION] [deadline/DEADLINE] [contact/CONTACT]` | `add name/John Doe contact/98765432;johnd@example.com products/Chocolate Cake:5 deadline/2025-12-31` |
+| **Add** | `add name/NAME [products/PRODUCTS] [location/LOCATION] [deadline/DEADLINE] [contact/CONTACT]` | `add name/John Doe products/Muffin:2 location/Clementi` |
 | **List** | `list` | `list`                                                                                               |
 | **Edit** | `edit INDEX [name/NAME] [products/PRODUCTS] [location/LOCATION] [deadline/DATE] [contact/CONTACT]` | `edit 2 name/James Lee contact/jameslee@example.com`                                                 |
 | **Find** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake`                                                                                    |
@@ -418,16 +461,9 @@ name, consider differentiating them, e.g. `John Doe (Clementi)` and `John Doe (T
 | **Clear** | `clear` | `clear`                                                                                              |
 | **Exit** | `exit` | `exit`                                                                                               |
 
-> [!TIP]
-> **Shorthand Prefixes:**
-> For the `add` and `edit` commands, you can use shorter versions of the prefixes to save time:
-> * `n/` instead of `name/`
-> * `p/` instead of `products/`
-> * `l/` instead of `location/`
-> * `d/` instead of `deadline/`
-> * `c/` instead of `contact/`
->
-> *Example:* `add n/John Doe p/Muffin` is equivalent to `add name/John Doe products/Muffin`.
+> **Tip:** Shorthand prefixes for `add` and `edit`: `n/` for `name/`, `p/` for `products/`, `l/` for `location/`,
+> `d/` for `deadline/`, and `c/` for `contact/`. Example: `add n/John Doe p/Muffin` is equivalent to
+> `add name/John Doe products/Muffin`.
 
 ---
 
@@ -437,11 +473,11 @@ name, consider differentiating them, e.g. `John Doe (Clementi)` and `John Doe (T
 |---|---|
 | **CLI** | Command Line Interface - a text-based way of interacting with software by typing commands |
 | **GUI** | Graphical User Interface - the visual window of the app |
-| **Customer** | A record representing a person who has placed or may place an order with your business |
+| **Customer** | A record representing an individual who has placed or may place an order with your business |
 | **Command** | A text instruction you type into the command box to perform an action |
 | **Parameter** | A piece of information supplied alongside a command, e.g. `name/John Doe` |
 | **Prefix** | The short label before a parameter value, e.g. `name/`, `products/`, `contact/` |
-| **Index** | The 1-based number shown beside each customer in the displayed list |
+| **Index** | The number shown beside each customer in the displayed list. It starts from 1. |
 | **Deadline** | A date (and optional time) representing when an order is due |
 | **Contact** | Consolidated contact details (phone and/or email) for a customer, separated by semicolons |
 | **Product** | An item associated with a customer's order, listed under Products |
