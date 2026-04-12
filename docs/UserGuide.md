@@ -30,10 +30,11 @@ do those updates in seconds with short commands, without switching between multi
     - [Installation](#installation)
     - [Overview of the Interface](#overview-of-the-interface)
     - [Your First Commands](#your-first-commands)
-- [Features](#features)
+- [General Usage Notes](#general-usage-notes)
     - [Notes on Command Format](#notes-on-command-format)
     - [Data Normalisation](#data-normalisation)
     - [The "Unique Name" Rule](#the-unique-name-rule)
+- [Features](#features)
     - [Viewing Help : `help`](#viewing-help--help)
     - [Adding a Customer : `add`](#adding-a-customer--add)
     - [Listing All Customers : `list`](#listing-all-customers--list)
@@ -164,7 +165,7 @@ Expected output: `Goodbye! Exiting ClientEase. You have <N> customer(s) saved.`
 
 ---
 
-## Features
+## General Usage Notes
 
 ### Notes on Command Format
 
@@ -205,12 +206,11 @@ ClientEase is designed for maximum efficiency. To allow you to edit or delete cu
 
 Why? This ensures that commands like `delete John Doe` are always unambiguous and fast to execute.
 
-Handling namesakes: If you have two customers with the same name, we recommend adding a distinguishing suffix, such as:
-
-- `John Doe`
-- `John Doe Jr`
+Handling namesakes: If one customer is `John Doe` and you need to distinguish a second customer with the same name, we recommend giving the second customer a distinguishing suffix, for example `John Doe Jr`.
 
 ---
+
+## Features
 
 ### Viewing Help : `help`
 
