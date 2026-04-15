@@ -5,9 +5,8 @@ title: User Guide
 
 # ClientEase User Guide
 
-**ClientEase is a lightweight customer contact manager designed for home-based online business owners** who manage a small to medium customer base,
-perform frequent daily updates to customer contact information, and prefer fast, command-line-style text input over
-GUI-driven interactions.
+**ClientEase is a lightweight customer contact manager designed for home-based business owners** who manage a small to medium customer base,
+perform frequent daily updates to customer contact information, and prefer fast, command-line-style text input.
 
 Instead of clicking through multiple menus, ClientEase lets you type short commands to add customers, search by fields,
 track products and deadlines, and retrieve information instantly, keeping your records organised without the overhead
@@ -60,7 +59,6 @@ ClientEase is built for **home-based online business owners** who:
 
 - Manage a **small to medium customer base** (typically under a few hundred contacts)
 - Perform **frequent daily updates** to customer information, such as new orders, contact changes, or delivery deadlines
-- Prefer **keyboard-driven workflows** over clicking through menus
 
 This guide assumes you are comfortable with:
 
@@ -671,6 +669,7 @@ delete John Doe
 ```
 Effect: Deletes the customer named `John Doe` (case-insensitive, extra spaces ignored).
 
+[↑ Back to Table of Contents](#table-of-contents)
 
 ---
 
