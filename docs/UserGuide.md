@@ -471,8 +471,8 @@ product list
 > - If the catalogue is empty, `add` and `edit` will reject any `products/` input and show "(no products in catalog)" in the allowed list.
 
 **Examples:**
-- `product add product/Muffin`
-- `product delete p/Muffin`
+- `product add p/Muffin`
+- `product delete product/Muffin`
 - `product list`
 
 <table><tr><td><img src="images/product1.png" alt="Before: Product add command" /></td><td><img src="images/product2.png" alt="After: Product added successfully" /></td></tr></table>
